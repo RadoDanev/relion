@@ -36,11 +36,11 @@
 #include <iostream>
 #include <vector>
 // Sizing
-#define JOBCOLWIDTH (250)
+//#define JOBCOLWIDTH (250)
 #define XJOBCOL1 (10)
-#define XJOBCOL2 (JOBCOLWIDTH + 25)
-#define XJOBCOL3 (2*JOBCOLWIDTH + 40)
-#define JOBHEIGHT (170)
+#define XJOBCOL2 (FINISHEDJOBS_WIDTH + 20)
+#define XJOBCOL3 (FINISHEDJOBS_WIDTH + JOBCOLWIDTH + 30)
+//#define JOBHEIGHT (170) // defined in gui_entries.h
 #define JOBHALFHEIGHT ( (JOBHEIGHT) / (2) )
 #define STDOUT_Y (60)
 #define STDERR_Y (170)

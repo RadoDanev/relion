@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 		FileName fn_sched = getParameter(argc, argv, "--schedule", "");
 		if (fn_sched != "") fn_sched = "Schedules/" + fn_sched;
 		int _update_every_sec = textToInteger(getParameter(argc, argv, "--refresh", "2"));
-		int _exit_after_sec = textToInteger(getParameter(argc, argv, "--idle", "3600"));
+		int _exit_after_sec = textToInteger(getParameter(argc, argv, "--idle", "999999"));
 		bool _do_read_only = checkParameter(argc, argv, "--readonly");
 		GuiMainWindow window(GUIWIDTH, GUIHEIGHT_EXT, titletext, fn_pipe, fn_sched, _update_every_sec, _exit_after_sec, _do_read_only);
 

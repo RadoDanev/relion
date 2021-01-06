@@ -84,21 +84,35 @@ extern bool create_scheduler_gui;
 	(std::max(0,(atoi(getenv ("RELION_QSUB_EXTRA_COUNT"))-4))*STEPY) : 0 )
 #define MENUHEIGHT 30
 #define TABHEIGHT 25
-#define GUIWIDTH 800
-#define GUIHEIGHT_OLD 420+GUIEXTRA
-#define GUIHEIGHT_EXT_START 370+GUIEXTRA
-#define GUIHEIGHT_EXT_START2 (GUIHEIGHT_EXT_START+MENUHEIGHT+10)
-#define GUIHEIGHT_EXT 800+GUIEXTRA
-#define XCOL0 200
-#define WCOL0 200
-#define XCOL1 ( (XCOL0) + 10  )
-#define XCOL2 ( (XCOL0) + 280 )
-#define XCOL3 ( (XCOL0) + 480 )
-#define XCOL4 ( (XCOL0) + 495 )
-#define XCOL5 ( (XCOL0) + 555 )
-#define ENTRY_FONTSIZE 13
+
+
+//====================== PLAY WITH THESE PARAMETERS ==========================
+
+#define GUIWIDTH 1000 // standard 800; recommended 1000; total GUI width
+#define GUIHEIGHT_EXT GUIEXTRA + 1000 // standard 800; recommended 1000; overall GUI height
+#define JOBHEIGHT 350 // standard 170; recommended 350; height of the finished job list etc. windows in the lower part of the GUI
+#define COMPACT_ERR_HEIGHT 50 // standard 50; height of the error window in the compact state (I/O view OFF)
+#define EXPAND_ERR_HEIGHT 85 // standard 85; height of the error window in the expanded state (I/O view ON)
+#define WCOL0 180 // standard 200; recommended 180; width of the job type list window
+#define FINISHEDJOBS_WIDTH 400 // standard 253; recommended 300-400; width of the finished jobs list window
+
+//=========================== END OF PLAY AREA ===============================
+
+
+#define JOBCOLWIDTH (GUIWIDTH - FINISHEDJOBS_WIDTH - 40)/2 // width of the small jobs windows
+#define ENTRY_FONTSIZE 13 // standard 13; font size in the options window
+#define GUIHEIGHT_OLD 410 + GUIEXTRA //height of the upper (old) portion of the main window
+#define GUIHEIGHT_EXT_START 360 + GUIEXTRA //start position 1 of the lower GUI portion
+#define GUIHEIGHT_EXT_START2 (GUIHEIGHT_EXT_START + MENUHEIGHT + 5) //start position 2 of the lower GUI portion
+//#define XCOL0 200 // seems to be unnecessary
+
+#define XCOL1 210 // only used if CTF in SGD is disabled by omitting ALLOW_CTF_IN_SGD
+#define XCOL2 ( WCOL0 + 280 ) // left edge of parameter boxes, must be large enough to fit the box names
+#define XCOL3 ( GUIWIDTH - 95 ) // right edge of parameter boxes
+#define XCOL4 ( GUIWIDTH - 80 )  // right edge of the "?" buttons
+#define XCOL5 ( GUIWIDTH - 20 ) // right edge of the "Browse" buttons
 #define STEPY 20
-#define COLUMN_SEPARATION 3
+#define COLUMN_SEPARATION 3 // space between columns in the parameter area, don't change
 #define WCOL1 ( (XCOL2) - (XCOL1) - (COLUMN_SEPARATION) )
 #define WCOL2 ( (XCOL3) - (XCOL2) - (COLUMN_SEPARATION) )
 #define WCOL3 ( (XCOL4) - (XCOL3) - (COLUMN_SEPARATION) )

@@ -279,10 +279,9 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 	FileName fn_lock=".gui_projectdir";
 	if (!exists(fn_lock))
 	{
-		std::cout << " Only run the relion GUI from your ProjectDirectory. Do you want to start a new project here [y/n]? ";
-		char c;
-		std::cin >> c;
-		if (c == 'y' || c == 'Y')
+		int ret = fl_choice("Your current directory does not look like a RELION project directory.\nOnly run the RELION GUI from your project directory.\nDo you want to start a new project here?", "Yes", "No", 0);
+		this->begin(); // apparently fl_choice changes Fl_Group::current. Thus, we have to reclaim it.
+		if (ret == 0)
 			touch(".gui_projectdir");
 		else
 		{
@@ -299,7 +298,7 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 
 	// Initial screen picture with some explanation on how to use the GUI
         //image_box = new Fl_Box(WCOL0-8, 0 ,w-WCOL0, h-35); // widget that will contain image
-	image_box = new Fl_Box(WCOL0-8, 50 ,w-WCOL0, h-120); // widget that will contain image
+	image_box = new Fl_Box(WCOL0-8, 40 ,w-WCOL0, h-120); // widget that will contain image
 	xpm_image = new Fl_Pixmap(gui_background);
 	image_box->image(xpm_image); // attach xpm image to box
 
@@ -394,140 +393,140 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 	current_job = -1;
 
 	int i = 0;
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Import");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_IMPORT);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Motion correction");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_MOTIONCORR);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("CTF estimation");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_CTFFIND);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Manual picking");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_MANUALPICK);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Auto-picking");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_AUTOPICK);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Particle extraction");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_EXTRACT);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Subset selection");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_CLASSSELECT);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("2D classification");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_2DCLASS);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("3D initial model");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_INIMODEL);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("3D classification");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_3DCLASS);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("3D auto-refine");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_3DAUTO);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("3D multi-body");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_MULTIBODY);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("CTF refinement");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_CTFREFINE);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Bayesian polishing");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_MOTIONREFINE);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Mask creation");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_MASKCREATE);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Join star files");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_JOINSTAR);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Particle subtraction");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_SUBTRACT);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Post-processing");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_POST);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("Local resolution");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_RESMAP);
 	browse_grp[i]->end();
 	i++;
 
-	browse_grp[i] = new Fl_Group(WCOL0, 2, 550, 615-MENUHEIGHT);
+	browse_grp[i] = new Fl_Group(WCOL0, 2, XCOL5, 615-MENUHEIGHT);
 	browser->add("External");
 	gui_jobwindows[i] = new JobWindow();
 	gui_jobwindows[i]->initialise(PROC_EXTERNAL);
@@ -589,7 +588,7 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 	alias_current_job = new Fl_Input(XJOBCOL2 , GUIHEIGHT_EXT_START+3, JOBCOLWIDTH, MENUHEIGHT-6, "Current:");
 
 	// Left-hand side browsers for input/output nodes and processes
-	display_io_node  = new Fl_Choice(XJOBCOL3+50, GUIHEIGHT_EXT_START+3, 200, MENUHEIGHT-6);
+	display_io_node  = new Fl_Choice(XJOBCOL3+60, GUIHEIGHT_EXT_START+3, JOBCOLWIDTH-60, MENUHEIGHT-6);
 	display_io_node->label("Display:");
 	display_io_node->color(GUI_BUTTON_COLOR);
 	display_io_node->callback(cb_display_io_node, this);
@@ -600,10 +599,10 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 	// Add browsers for finished and running jobs
 	Fl_Text_Buffer *textbuff1 = new Fl_Text_Buffer();
 	textbuff1->text("Finished jobs");
-	Fl_Text_Display* textdisp1 = new Fl_Text_Display(XJOBCOL1, GUIHEIGHT_EXT_START2, JOBCOLWIDTH, 25);
+	Fl_Text_Display* textdisp1 = new Fl_Text_Display(XJOBCOL1, GUIHEIGHT_EXT_START2, FINISHEDJOBS_WIDTH, 25);
 	textdisp1->buffer(textbuff1);
 	textdisp1->color(GUI_BACKGROUND_COLOR);
-	finished_job_browser  = new Fl_Select_Browser(XJOBCOL1, GUIHEIGHT_EXT_START2 + 25, JOBCOLWIDTH, JOBHEIGHT+25);
+	finished_job_browser  = new Fl_Select_Browser(XJOBCOL1, GUIHEIGHT_EXT_START2 + 25, FINISHEDJOBS_WIDTH, JOBHEIGHT+25);
 	finished_job_browser->callback(cb_select_finished_job, this);
 	finished_job_browser->textsize(RLN_FONTSIZE-1);
 	finished_job_browser->end();
@@ -651,8 +650,8 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 	// Disable warning message about UTF-8 transcoding
 	textbuff_stdout->transcoding_warning_action=NULL;
 	textbuff_stderr->transcoding_warning_action=NULL;
-	disp_stdout = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT_START2 + JOBHEIGHT + STDOUT_Y-5, w-20, 105);
-	disp_stderr = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT_START2 + JOBHEIGHT + STDERR_Y-5, w-20, 50);
+	disp_stdout = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT_START2 + JOBHEIGHT + 55, w-20, GUIHEIGHT_EXT - COMPACT_ERR_HEIGHT - JOBHEIGHT - GUIHEIGHT_EXT_START2 - 65);
+	disp_stderr = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT - COMPACT_ERR_HEIGHT - 5, w-20, COMPACT_ERR_HEIGHT);
 	disp_stdout->fn_file = "run.out";
 	disp_stderr->fn_file = "run.err";
 	textbuff_stdout->text("stdout will go here; double-click this window to open stdout in a separate window");
@@ -930,8 +929,8 @@ GuiMainWindow::GuiMainWindow(int w, int h, const char* title, FileName fn_pipe, 
 	expand_stdout_grp = new Fl_Group(0, 0, 4*w, 4*h);
 	expand_stdout_grp->begin();
 
-	disp_expand_stdout = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT_START2-5, w-20, 300);
-	disp_expand_stderr = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT_START2-5 + 305, w-20, 85);
+	disp_expand_stdout = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT_START2, w-20, GUIHEIGHT_EXT - EXPAND_ERR_HEIGHT - GUIHEIGHT_EXT_START2 - 10);
+	disp_expand_stderr = new StdOutDisplay(XJOBCOL1, GUIHEIGHT_EXT - EXPAND_ERR_HEIGHT - 5, w-20, EXPAND_ERR_HEIGHT);
 	disp_expand_stdout->fn_file = "run.out";
 	disp_expand_stderr->fn_file = "run.err";
 	textbuff_stdout->text("stdout will go here; double-click this window to open stdout in a separate window");
@@ -1438,7 +1437,7 @@ void GuiMainWindow::fillStdOutAndErr()
 		else
 		{
 			// Remove annoying carriage returns
-			std::string command = "tail -n 20 < " + fn_out + " | awk -F\"\r\" '{if (NF>1) {print $NF} else {print}}' > " + fn_outtail;
+			std::string command = "tail -n 50 < " + fn_out + " | awk -F\"\r\" '{if (NF>1) {print $NF} else {print}}' > " + fn_outtail;
 			int res = system(command.c_str());
 			std::ifstream in(fn_outtail.c_str(), std::ios_base::in);
 			if (in.fail())
