@@ -1,7 +1,11 @@
-RELION 3.1.1
+RELION 3.1.1 GUI resize
 =============
 
-RELION GUI resize
+Edit the parameters in the "play" section of the gui_entries.h header file and then 
+
+```
+make install # Only when you have specified CMAKE_INSTALL_PREFIX in the cmake step
+```
 
 RELION 3.1.1
 =============
